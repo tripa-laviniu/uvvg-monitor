@@ -54,10 +54,16 @@ Returnează EXCLUSIV un array JSON valid (fără text, fără markdown, fără `
 
 Dacă nu există rezultate returnează: []"""
 
+    # Debug: verifică cheia (afișează doar primele/ultimele 4 caractere)
+    key = ANTHROPIC_API_KEY
+    print(f"[DEBUG] API Key length: {len(key)}")
+    print(f"[DEBUG] API Key preview: {key[:8]}...{key[-4:]}")
+    print(f"[DEBUG] Starts with 'sk-ant-': {key.startswith('sk-ant-')}")
+
     response = requests.post(
         "https://api.anthropic.com/v1/messages",
         headers={
-            "x-api-key": ANTHROPIC_API_KEY,
+            "x-api-key": key.strip(),
             "anthropic-version": "2023-06-01",
             "content-type": "application/json",
         },
